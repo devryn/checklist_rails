@@ -1,0 +1,8 @@
+<h2>Tasks:</h2>
+<% tasks.each do |task| %>
+<div class='task'>
+  <ul>
+    <li><%= link_to task.body, task %></li>
+  </ul>
+</div>
+<% end %>

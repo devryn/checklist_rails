@@ -1,0 +1,17 @@
+<h2><%= form_title %></h2>
+
+<% if list.errors.any? %>
+    <% list.errors.full_messages.each do |msg| %>
+      <p> <%= msg %></p>
+    <% end %>
+  <% end %>
+
+  <%= form_for(list) do |f| %>
+    <label for="name">Name</label>
+
+    <%=f.text_area :name, placeholder: 'Name that list!', class: 'form-control' %>
+
+    <p><div class ='actions text-center'>
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
