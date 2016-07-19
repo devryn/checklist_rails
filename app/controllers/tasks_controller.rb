@@ -38,16 +38,10 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
-    list.name = params[:list][:name] if params[:list][:name].present?
-    task.position = params[:task][:position] if params[:task][:position].present?
-    task.body = params[:task][:body] if params[:task][:body].present?
-    task.completed = params[:task][:completed] if params[:task][:completed].present?
-    if task.save
-      redirect_to task_path(task)
+    if task.update(task_params)
+      redirect_to task
     else
-      render locals: {
-        task:task
-      }
+      render :edit
     end
   end
 

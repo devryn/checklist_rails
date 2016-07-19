@@ -19,7 +19,6 @@ class ListsController < ApplicationController
 
   def create
     list = List.new(list_params)
-    list.name = params[:list][:name]
     if list.save
       redirect_to list_path(list)
     else
@@ -35,13 +34,10 @@ class ListsController < ApplicationController
 
   def update
     list = List.find(params[:id])
-    list.body = params[:list][:body] if params[:list][:body].present?
-    if list.save
-      redirect_to list_path(list)
+    if list.update(list_params)
+      redirect_to list
     else
-      render locals: {
-        list:list
-      }
+      render :edit
     end
   end
 
@@ -59,6 +55,6 @@ class ListsController < ApplicationController
 
   private
   def list_params
-    params.require[:list].permit(:name)
+    params.require(:list).permit(:name)
   end
 end
